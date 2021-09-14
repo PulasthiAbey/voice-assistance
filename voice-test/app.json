@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "voice-test",
+    "slug": "voice-test",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "voice-test"
+}
