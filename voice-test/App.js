@@ -20,7 +20,7 @@ export default class App extends React.Component {
   // constructor
   constructor(props) {
     super(props);
-    Voice._onSpeechResults = (res) => {
+    Voice.onSpeechResults = (res) => {
       const name = JSON.stringify(res);
       handleCheck(name);
     };
@@ -47,12 +47,12 @@ export default class App extends React.Component {
   handleTest() {
     alert("Test Function Called");
   }
-
+  // Voice.start("en-us")
   render() {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.container}>
-          <TouchableHighlight onPress={() => Voice.start("en-us")}>
+          <TouchableHighlight onPress={() => handleCar()}>
             <Image
               style={styles.imageButton}
               source={{
@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     padding: 5,
+    paddingTop: 200,
   },
 
   imageButton: {
