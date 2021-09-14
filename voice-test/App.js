@@ -17,12 +17,41 @@ const propTypes = {};
 const defaultProps = {};
 
 export default class App extends React.Component {
+  // constructor
+  constructor(props) {
+    super(props);
+    Voice._onSpeechResults = (res) => {
+      const name = JSON.stringify(res);
+      handleCheck(name);
+    };
+  }
+
+  handleCheck(name) {
+    if (name === "call car") {
+      handleCar();
+    } else if (name === "call bike") {
+      handleBike();
+    } else if (name === "call test") {
+      handleTest();
+    }
+  }
+
+  handleCar() {
+    alert("Car Function Called");
+  }
+
+  handleBike() {
+    alert("Bike Function Called");
+  }
+
+  handleTest() {
+    alert("Test Function Called");
+  }
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.container}>
-          <Text style={styles.textStyle}>Press mike to start Recognition</Text>
-          Touchable image for the
           <TouchableHighlight onPress={() => Voice.start("en-us")}>
             <Image
               style={styles.imageButton}
