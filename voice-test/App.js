@@ -12,7 +12,11 @@ import {
 // import Voice
 import Voice from "react-native-voice";
 
-export default class App extends Component {
+const propTypes = {};
+
+const defaultProps = {};
+
+export default class App extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -32,6 +36,9 @@ export default class App extends Component {
     );
   }
 }
+
+App.propTypes = propTypes;
+App.defaultProps = defaultProps;
 
 const styles = StyleSheet.create({
   container: {
