@@ -20,46 +20,49 @@ export default class App extends React.Component {
   // constructor
   constructor(props) {
     super(props);
-    this.state = { string: "Sample String", callName: "Sample Call Name" };
+    this.state = {
+      string: [],
+      carName: "call car",
+      bikeName: "call bike",
+      testName: "call test",
+    };
+
     Voice.onSpeechResults = (res) => {
-      const name = JSON.stringify(res);
-      this.handleCheck(res);
-      this.setState({ string: name });
+      // const name = JSON.stringify(res);
+      this.handleStringArray();
+      this.setState({ string: JSON.parse(res) }); //   this.setState({ string: name }); --> for the basic function call
     };
   }
 
+  handleStringArray() {
+    if (this.state.string[0] === "call") {
+      const command = this.state.string[0] + this.state.string[1];
+      handleCheck(command);
+    } else if (this.state.string[0] === "change") {
+      switch (this.state.string[1]) {
+        case "car":
+          this.state.carName = this.state.string[1];
+          break;
+        case "bike":
+          this.state.bikeName = this.state.string[1];
+          break;
+        case "test":
+          this.state.testName = this.state.string[1];
+          break;
+
+        default:
+          break;
+      }
+    }
+  }
+
   handleCheck(name) {
-    console.log(this.state.string);
-    if (
-      name.value.includes("call car") ||
-      name.value.includes("cal ka") ||
-      name.value.includes("call ka") ||
-      name.value.includes("call CA") ||
-      name.value.includes("kolka") ||
-      name.value.includes("Kolkata") ||
-      name.value.includes("cal car")
-    ) {
+    console.log(name.value);
+    if (name.value.includes(this.state.carName)) {
       this.handleCar();
-    } else if (
-      name.value.includes("call bike") ||
-      name.value.includes("cal bike") ||
-      name.value.includes("call back") ||
-      name.value.includes("callbike") ||
-      name.value.includes("callback") ||
-      name.value.includes("call mike") ||
-      name.value.includes("calbike") ||
-      name.value.includes("call byk") ||
-      name.value.includes("koi bike") ||
-      name.value.includes("calback")
-    ) {
+    } else if (name.value.includes(this.state.bikeName)) {
       this.handleBike();
-    } else if (
-      name.value.includes("call test") ||
-      name.value.includes("cal test") ||
-      name.value.includes("call rest") ||
-      name.value.includes("coldest") ||
-      name.value.includes("call dost")
-    ) {
+    } else if (name.value.includes(this.state.testName)) {
       this.handleTest();
     }
   }
@@ -75,7 +78,7 @@ export default class App extends React.Component {
   handleTest() {
     alert("Test Function Called");
   }
-  // this.handleCheck(
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
