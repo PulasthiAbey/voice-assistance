@@ -20,7 +20,7 @@ export default class App extends React.Component {
   // constructor
   constructor(props) {
     super(props);
-    this.state = { string: "Sample String" };
+    this.state = { string: "Sample String", callName: "Sample Call Name" };
     Voice.onSpeechResults = (res) => {
       const name = JSON.stringify(res);
       this.handleCheck(res);
@@ -29,13 +29,38 @@ export default class App extends React.Component {
   }
 
   handleCheck(name) {
-    console.log(this.name);
-    if (name.value.includes("call car")) {
-      handleCar();
-    } else if (name.value.includes("call bike")) {
-      handleBike();
-    } else if (name.value.includes("call test")) {
-      handleTest();
+    console.log(this.state.string);
+    if (
+      name.value.includes("call car") ||
+      name.value.includes("cal ka") ||
+      name.value.includes("call ka") ||
+      name.value.includes("call CA") ||
+      name.value.includes("kolka") ||
+      name.value.includes("Kolkata") ||
+      name.value.includes("cal car")
+    ) {
+      this.handleCar();
+    } else if (
+      name.value.includes("call bike") ||
+      name.value.includes("cal bike") ||
+      name.value.includes("call back") ||
+      name.value.includes("callbike") ||
+      name.value.includes("callback") ||
+      name.value.includes("call mike") ||
+      name.value.includes("calbike") ||
+      name.value.includes("call byk") ||
+      name.value.includes("koi bike") ||
+      name.value.includes("calback")
+    ) {
+      this.handleBike();
+    } else if (
+      name.value.includes("call test") ||
+      name.value.includes("cal test") ||
+      name.value.includes("call rest") ||
+      name.value.includes("coldest") ||
+      name.value.includes("call dost")
+    ) {
+      this.handleTest();
     }
   }
 
