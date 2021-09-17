@@ -29,8 +29,12 @@ export default class App extends React.Component {
     };
 
     Voice.onSpeechResults = (res) => {
+      const valuesArray = JSON.parse(res);
+      this.setState({
+        string: valuesArray, //______________________________________ this.setState({ string: name }); --> for the basic function call
+        log: JSON.stringify(res),
+      });
       this.handleStringArray();
-      this.setState({ string: JSON.parse(res), log: JSON.stringify(res) }); //   this.setState({ string: name }); --> for the basic function call
     };
   }
 
