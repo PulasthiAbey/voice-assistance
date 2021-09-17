@@ -17,23 +17,24 @@ const propTypes = {};
 const defaultProps = {};
 
 export default class App extends React.Component {
-  name = "";
   // constructor
   constructor(props) {
     super(props);
+    this.state = { string: "Sample String" };
     Voice.onSpeechResults = (res) => {
-      this.name = JSON.stringify(res);
-      this.handleCheck();
+      const name = JSON.stringify(res);
+      this.handleCheck(res);
+      this.setState({ string: name });
     };
   }
 
-  handleCheck() {
+  handleCheck(name) {
     console.log(this.name);
-    if (this.name === "call car") {
+    if (name.value.includes("call car")) {
       handleCar();
-    } else if (this.name === "call bike") {
+    } else if (name.value.includes("call bike")) {
       handleBike();
-    } else if (this.name === "call test") {
+    } else if (name.value.includes("call test")) {
       handleTest();
     }
   }
@@ -54,6 +55,7 @@ export default class App extends React.Component {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.container}>
+          <Text>{this.state.string}</Text>
           <TouchableOpacity onPress={() => Voice.start("en-us")}>
             <Image
               style={styles.imageButton}
@@ -62,7 +64,6 @@ export default class App extends React.Component {
               }}
             />
           </TouchableOpacity>
-          {this.name}
         </View>
       </SafeAreaView>
     );
