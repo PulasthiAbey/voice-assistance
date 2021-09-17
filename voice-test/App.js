@@ -25,12 +25,12 @@ export default class App extends React.Component {
       carName: "call car",
       bikeName: "call bike",
       testName: "call test",
+      log: "",
     };
 
     Voice.onSpeechResults = (res) => {
-      // const name = JSON.stringify(res);
       this.handleStringArray();
-      this.setState({ string: JSON.parse(res) }); //   this.setState({ string: name }); --> for the basic function call
+      this.setState({ string: JSON.parse(res), log: JSON.stringify(res) }); //   this.setState({ string: name }); --> for the basic function call
     };
   }
 
@@ -39,15 +39,16 @@ export default class App extends React.Component {
       const command = this.state.string[0] + this.state.string[1];
       handleCheck(command);
     } else if (this.state.string[0] === "change") {
+      const command = this.state.string[3] + this.state.string[4];
       switch (this.state.string[1]) {
         case "car":
-          this.state.carName = this.state.string[1];
+          this.setState({ carName: command });
           break;
         case "bike":
-          this.state.bikeName = this.state.string[1];
+          this.setState({ bikeName: command });
           break;
         case "test":
-          this.state.testName = this.state.string[1];
+          this.setState({ testName: command });
           break;
 
         default:
@@ -83,7 +84,7 @@ export default class App extends React.Component {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.container}>
-          <Text>{this.state.string}</Text>
+          <Text>{this.state.log}</Text>
           <TouchableOpacity onPress={() => Voice.start("en-us")}>
             <Image
               style={styles.imageButton}
