@@ -29,7 +29,7 @@ export default class App extends React.Component {
     };
 
     Voice.onSpeechResults = (res) => {
-      const valuesArray = JSON.parse(res);
+      const valuesArray = res;
       this.setState({
         string: valuesArray, //______________________________________ this.setState({ string: name }); --> for the basic function call
         log: JSON.stringify(res),
@@ -39,10 +39,10 @@ export default class App extends React.Component {
   }
 
   handleStringArray() {
-    if (this.state.string[0] === "call") {
+    if (this.state.string[0].includes("call")) {
       const command = this.state.string[0] + this.state.string[1];
       handleCheck(command);
-    } else if (this.state.string[0] === "change") {
+    } else if (this.state.string[0].includes("update")) {
       const command = this.state.string[3] + this.state.string[4];
       switch (this.state.string[1]) {
         case "car":
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     padding: 5,
-    paddingTop: 200,
+    paddingTop: 100,
   },
 
   imageButton: {
